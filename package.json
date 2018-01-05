@@ -86,6 +86,6 @@
   },
   "homepage": "https://github.com/Donila/sk-attacks",
   "engines": {
-    "node": "stable"
+    "node": "7.10.0"
   }
 }
