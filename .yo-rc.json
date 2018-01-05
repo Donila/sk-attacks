@@ -1,0 +1,18 @@
+{
+  "generator-ng-fullstack": {
+    "appName": "sk-attacks",
+    "username": "Donila",
+    "userEmail": "donila2008@gmail.com",
+    "stack": "fullstack",
+    "repoHostUrl": "github.com",
+    "userNameSpace": "Donila",
+    "client": "vue2",
+    "stylePreprocessor": "less",
+    "server": "node",
+    "nodeWebFrameworkServer": "express",
+    "transpilerServer": "babel",
+    "secure": false,
+    "testsSeparated": true,
+    "differentStaticServer": false
+  }
+}
