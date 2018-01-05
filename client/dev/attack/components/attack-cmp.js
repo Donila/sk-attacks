@@ -244,7 +244,7 @@
         return true;
       },
       convertTime(time) {
-        duration = moment.duration(time);
+        let duration = moment.duration(time);
 
         return duration.asSeconds();
       },
