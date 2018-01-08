@@ -5,7 +5,7 @@
           time: moment.now()
         }
       },
-      props: ['army'],
+      props: ['army', 'x'],
       template: `
         <div>{{ timeToTarget(army) }}</div>
       `,
@@ -19,8 +19,8 @@
         start() {
             
         },
-        timeToTarget(army) {
-          let duration = moment.duration(army.timeToTarget, 'seconds');
+        timeToTarget() {
+          let duration = moment.duration(this.army.timeToTarget * this.army.speedMultiplier / this.x, 'seconds');
             return this.formatTime(duration.hours()) + ":" + this.formatTime(duration.minutes()) + ":" + this.formatTime(duration.seconds());
         },
         formatTime(t) {

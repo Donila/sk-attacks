@@ -25,14 +25,14 @@
             sortable: false,
             value: 'name'
           },
+          { text: 'Delay', value: 'delay' },
           { text: 'Time', sortable: false },
           { text: '1x', sortable: false },
           { text: '2x', sortable: false },
           { text: '3x', sortable: false },
           { text: '4x', sortable: false },
           { text: '5x', sortable: false },
-          { text: '6x', sortable: false },
-          { text: 'Delay (s)', value: 'delay' }
+          { text: '6x', sortable: false }
         ],
         snackBarText: 'UPDATED!',
         snackbar: false
@@ -83,11 +83,13 @@
               <template slot="items" slot-scope="props">
                 <tr v-bind:class="{ 'indigo lighten-3': props.item.name == editingArmy }">
                   <td>{{ props.item.name }}</td>
-                  <td class="text-xs-right"><time-list :army="props.item"></time-list></td>
-                  <td class="text-xs-right" v-for="i in 6" v-bind:class="{ 'indigo darken-4': props.item.speedMultiplier == i }"><a v-if="!editingArmy" @click="changeToX(props.item, i)">{{ fromLeader(props.item, i) }}</a> <span v-if="editingArmy">{{ fromLeader(props.item, i) }}</span></td>
                   <td>
-                    {{props.item.delay}}
+                    {{props.item.delay}}s ({{timeWithDelay(props.item)}})
                   </td>
+                  <td class="text-xs-right">
+                    {{timeWhen(props.item)}}
+                  </td>
+                  <td class="text-xs-right" v-for="i in 6" v-bind:class="{  'indigo darken-4': props.item.speedMultiplier == i }"><a v-if="!editingArmy" @click="changeToX(props.item, i)"><time-list :army="props.item" :x="i"></time-list></a> <span v-if="editingArmy"><time-list :army="props.item" :x="i"></time-list></span></td>
                   <td>
                     <v-icon @click="editArmy(props.item)">mdi-pencil-circle</v-icon>
                     <v-icon @click="removeArmy(props.item)">mdi-delete-circle</v-icon>
@@ -256,7 +258,7 @@
           return { name: '' };
         }
       },
-      fromLeader(army, x) {
+      timeWhen(army, x) {
         if (!x) {
           x = army.speedMultiplier;
         }
@@ -280,8 +282,6 @@
             m = this.attackTime.split(':')[1];
           }
 
-          let time = moment().utc().hours(h).minutes(m).seconds(0).milliseconds(0);
-
           let delay = 0;
           try {
             delay = parseInt(army.delay);
@@ -290,14 +290,36 @@
             console.log("Entered delay is unsupported.");
           }
 
-          let duration = moment.duration(army.timeToTarget * army.speedMultiplier / x + delay, 'seconds');
+          let duration = moment.duration(army.timeToTarget * army.speedMultiplier / x, 'seconds');
 
-          let timeWhen = time.subtract(duration);
+          let time = moment().utc().hours(h).minutes(m).seconds(0).milliseconds(0);
+
+          let timeWhen = time.add(delay, 'seconds').subtract(duration);
 
           return timeWhen.format("H:mm:ss");
         } else {
           return "no armies";
         }
+      },
+      timeWithDelay(army) {
+        let h = 0;
+        let m = 0;
+
+        if (this.attackTime && this.attackTime.split(':').length > 1) {
+          h = this.attackTime.split(':')[0];
+          m = this.attackTime.split(':')[1];
+        }
+        let delay = 0;
+        try {
+          delay = parseInt(army.delay);
+        } catch (e) {
+          console.log(e);
+          console.log("Entered delay is unsupported.");
+        }
+
+        let time = moment().utc().hours(h).minutes(m).seconds(0).milliseconds(0);
+
+        return time.add(delay, 'seconds').format("H:mm:ss");
       },
       timeToTarget(army) {
         let duration = moment.duration(army.timeToTarget, 'seconds');
