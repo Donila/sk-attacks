@@ -170,6 +170,8 @@
       },
       add(attack) {
         if(this.validateAttack()) {
+          let h = 0;
+          let m = 0;
           if (this.attackTime && this.attackTime.split(':').length > 1) {
             h = this.attackTime.split(':')[0];
             m = this.attackTime.split(':')[1];
