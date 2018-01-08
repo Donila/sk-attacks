@@ -15,6 +15,17 @@ export default class AttackController {
         .catch(error => res.status(400).json(error));
   }
 
+  static update(req, res) {
+    AttackDAO
+      .update({ _id: req.params.id }, { $set: req.body})
+      .then((todo) => {
+        return res.status(200).json(todo);
+      })
+      .catch((error) => {
+        return res.status(400).json(error);
+      });
+}
+
   static createTodo(req, res) {
     let _todo = req.body;
 

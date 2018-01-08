@@ -2,8 +2,8 @@ Vue.use(VueRouter);
 Vue.use(Vuetify);
 
 const routes = [
-  { path: '/', component: {template: "<attack-cmp></attack-cmp>"} },
-  { path: '/attack/:id', component: {template: "<attack-page></attack-page>"} }
+  { name: 'home', path: '/', component: {template: "<attack-cmp></attack-cmp>"} },
+  { name: 'attack', path: '/attack/:id', component: {template: "<attack-cmp></attack-cmp>"} }
 ];
 // { path: '/user/:id', component: User }
 const router = new VueRouter({routes});

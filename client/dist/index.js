@@ -1,2 +1,2 @@
-'use strict';Vue.use(VueRouter),Vue.use(Vuetify);var routes=[{path:'/',component:{template:'<attack-cmp></attack-cmp>'}},{path:'/attack/:id',component:{template:'<attack-page></attack-page>'}}],router=new VueRouter({routes:routes});// { path: '/user/:id', component: User }
+'use strict';Vue.use(VueRouter),Vue.use(Vuetify);var routes=[{name:'home',path:'/',component:{template:'<attack-cmp></attack-cmp>'}},{name:'attack',path:'/attack/:id',component:{template:'<attack-cmp></attack-cmp>'}}],router=new VueRouter({routes:routes});// { path: '/user/:id', component: User }
 new Vue({router:router}).$mount('#app');

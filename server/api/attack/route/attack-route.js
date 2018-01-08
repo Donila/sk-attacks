@@ -9,6 +9,8 @@ export default class AttackRoutes {
 
     router
     .route("/api/attacks/:id")
+    .get(AttackController.getById)
+    .put(AttackController.update)
     .delete(AttackController.deleteTodo);
   }
 }

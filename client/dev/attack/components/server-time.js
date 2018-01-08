@@ -6,7 +6,7 @@
         }
       },
       template: `<h1>
-        Using time from server: <b>{{getTime()}}</b></h1>
+        {{getTime()}}</h1>
       `,
       mounted() {
         this.start();
@@ -29,7 +29,7 @@
             
         },
         getTime() {
-            return (new moment(this.time)).format("dddd, MMMM Do YYYY, H:mm:ss");
+            return (new moment(this.time)).utc().format("H:mm:ss");
         }
       }
     });
