@@ -14,7 +14,10 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/server/index.js"
+            "program": "${workspaceFolder}/server/index.js",
+            "env": {
+                "DISCORD_TOKEN": "Mzk5ODg3OTg4ODM1ODc2ODY2.DTkf9A.w90IcSQf84qWwxeywBQizTT4ZBg"
+            }
         }
     ]
 }

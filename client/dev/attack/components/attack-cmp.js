@@ -53,14 +53,14 @@
       </v-layout>
 
         <v-layout row wrap>
-          <v-flex xs12 md3>
+          <v-flex xs12 md4>
             <v-layout row>
               <v-flex xs12>
                 <v-time-picker v-model="attackTime" format="24hr"></v-time-picker>
               </v-flex>
             </v-layout>
           </v-flex>
-          <v-flex xs12 md9>
+          <v-flex xs12 md8>
             <v-layout row wrap>
               <v-flex xs12>
                   <h2 v-if="!editingArmy">Add new army</h2>
@@ -82,7 +82,11 @@
               >
               <template slot="items" slot-scope="props">
                 <tr v-bind:class="{ 'indigo lighten-3': props.item.name == editingArmy }">
-                  <td>{{ props.item.name }}</td>
+                  <td>
+                    <v-icon @click="editArmy(props.item)">mdi-pencil-circle</v-icon>
+                    <v-icon @click="removeArmy(props.item)">mdi-delete-circle</v-icon>
+                    {{ props.item.name }}
+                  </td>
                   <td>
                     {{props.item.delay}}s ({{timeWithDelay(props.item)}})
                   </td>
@@ -90,10 +94,6 @@
                     {{timeWhen(props.item)}}
                   </td>
                   <td class="text-xs-right" v-for="i in 6" v-bind:class="{  'indigo darken-4': props.item.speedMultiplier == i }"><a v-if="!editingArmy" @click="changeToX(props.item, i)"><time-list :army="props.item" :x="i"></time-list></a> <span v-if="editingArmy"><time-list :army="props.item" :x="i"></time-list></span></td>
-                  <td>
-                    <v-icon @click="editArmy(props.item)">mdi-pencil-circle</v-icon>
-                    <v-icon @click="removeArmy(props.item)">mdi-delete-circle</v-icon>
-                  </td>
                 </tr>
               </template>
             </v-data-table>
