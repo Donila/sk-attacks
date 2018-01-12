@@ -14,8 +14,19 @@ export default class DiscordBot {
       console.log(`Hello! I am sk-attack-bot. I will help you to coordinate your attacks using ${skServerUrl}`);
     });
 
+    setInterval(function() {
+      let options = {
+        method: 'GET',
+        url: skServerUrl
+      };
+      Request(options, (err, res, body) => {
+        if(!err) {
+          console.log('Heroku app is UP!');
+        }
+      });
+    }, 1000 * 60 * 30); // every 30 minutes
+
     client.on('message', message => {
-      const skServerUrl = 'http://sk-attacks.herokuapp.com';
     if(message.content.indexOf('!time') > -1) {
         message.reply(`Synchronizing time: ${moment().utc().format('HH:mm:ss')}`);
     }
