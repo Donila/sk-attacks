@@ -26,7 +26,7 @@
             value: 'name'
           },
           { text: 'Delay', value: 'delay' },
-          { text: 'Time', sortable: false },
+          { text: 'Time', value: 'timeToTarget' },
           { text: '1x', sortable: false },
           { text: '2x', sortable: false },
           { text: '3x', sortable: false },
